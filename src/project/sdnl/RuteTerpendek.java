@@ -4,6 +4,8 @@
  */
 package project.sdnl;
 
+import javax.swing.*;
+import java.util.InputMismatchException;
 import java.util.List;
 
 /**
@@ -11,7 +13,8 @@ import java.util.List;
  * @author HP
  */
 public class RuteTerpendek extends javax.swing.JFrame {
-    private final  AngkotGraph graph = new AngkotGraph(20);
+
+    private final AngkotGraph graph = new AngkotGraph(20);
 
     /**
      * Creates new form RuteTerpendek
@@ -19,7 +22,7 @@ public class RuteTerpendek extends javax.swing.JFrame {
     public RuteTerpendek() {
         initComponents();
         initializeGraph();
-        
+
     }
 
     private void initializeGraph() {
@@ -59,9 +62,7 @@ public class RuteTerpendek extends javax.swing.JFrame {
         graph.addEdge("UGM Kampus Geologi", "Pasar Sambeng", 3);
         graph.addEdge("Vihara Candirejo", "Pasar Sambeng", 4);
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -210,17 +211,23 @@ public class RuteTerpendek extends javax.swing.JFrame {
 
     private void jMulaiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMulaiButtonActionPerformed
         // TODO add your handling code here:
-        String startDestination = jTextField4.getText();
-        String finishDestination = jTextField1.getText();
-        
-        List<String>shortest = graph.findShortestPath(startDestination, finishDestination);
-        if(shortest!=null){
-            System.out.println("Jalur terpendek : " + String.join("->" , shortest));
-        }
-        else{
-            System.out.println("Gak ada ");
-        }
-    }//GEN-LAST:event_jMulaiButtonActionPerformed
+        try {
+            String startDestination = jTextField4.getText();
+            String finishDestination = jTextField1.getText();
+            List<String> shortestPath = graph.findShortestPath(startDestination, finishDestination);
+
+            System.out.println("Intermediate Vertices:");
+//            for (String vertex : shortestPath) {
+//                jTextField5.setText(vertex);
+//               }
+            if (shortestPath != null) {
+                jTextField5.setText(String.join(" -> ", shortestPath));
+            }
+
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            JOptionPane.showMessageDialog(null, "Vertex Invalid");
+        }//GEN-LAST:event_jMulaiButtonActionPerformed
+    }
 
     /**
      * @param args the command line arguments

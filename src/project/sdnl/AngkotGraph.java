@@ -110,6 +110,39 @@ public class AngkotGraph {
         return -1;
     }
 
+    public List<String> getIntermediateVertices(String source, String destination) {
+        int sourceIndex = getNodeIndex(source);
+        int destinationIndex = getNodeIndex(destination);
+
+        int[] distance = new int[V];
+        Arrays.fill(distance, Integer.MAX_VALUE);
+
+        PriorityQueue<Node> priorityQueue = new PriorityQueue<>(Comparator.comparingInt(node -> node.weight));
+        distance[sourceIndex] = 0;
+        priorityQueue.add(new Node(sourceIndex, 0));
+
+        // Menyimpan vertex yang dilalui
+        List<String> intermediateVertices = new ArrayList<>();
+
+        while (!priorityQueue.isEmpty()) {
+            int u = priorityQueue.poll().vertex;
+
+            for (int v = 0; v < V; v++) {
+                int weight = adjMatrix[u][v];
+
+                if (weight > 0 && distance[u] + weight < distance[v]) {
+                    distance[v] = distance[u] + weight;
+                    priorityQueue.add(new Node(v, distance[v]));
+
+                    // Menambahkan vertex yang dilalui ke dalam daftar
+                    intermediateVertices.add(getNodeName(v));
+                }
+            }
+        }
+
+        return intermediateVertices;
+    }
+
     private static class Node {
 
         int vertex;
