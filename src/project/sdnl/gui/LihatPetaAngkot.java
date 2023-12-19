@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package project.sdnl;
+package project.sdnl.gui;
 
 /**
  *
@@ -48,7 +48,7 @@ public class LihatPetaAngkot extends javax.swing.JFrame {
 
         jToggleButton2.setText("Keluar");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project/sdnl/R2.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project/sdnl/img/R2.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

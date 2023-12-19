@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package project.sdnl;
+package project.sdnl.gui;
+
+import project.sdnl.graphUtils.AngkotGraph;
 
 import javax.swing.*;
-import java.util.InputMismatchException;
 import java.util.List;
 
 /**
@@ -217,9 +218,7 @@ public class RuteTerpendek extends javax.swing.JFrame {
             List<String> shortestPath = graph.findShortestPath(startDestination, finishDestination);
 
             System.out.println("Intermediate Vertices:");
-//            for (String vertex : shortestPath) {
-//                jTextField5.setText(vertex);
-//               }
+
             if (shortestPath != null) {
                 jTextField5.setText(String.join(" -> ", shortestPath));
             }
