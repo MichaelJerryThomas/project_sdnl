@@ -5,6 +5,7 @@
 package project.sdnl;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -121,8 +122,18 @@ public class RuteTerpendek extends javax.swing.JFrame {
         });
 
         jResetButton1.setText("Reset");
+        jResetButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jResetButton1ActionPerformed(evt);
+            }
+        });
 
         jToggleButton2.setText("Keluar");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -200,8 +211,10 @@ public class RuteTerpendek extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
@@ -209,18 +222,36 @@ public class RuteTerpendek extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jMulaiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMulaiButtonActionPerformed
-        // TODO add your handling code here:
-        String startDestination = jTextField4.getText();
-        String finishDestination = jTextField1.getText();
-        
-        List<String>shortest = graph.findShortestPath(startDestination, finishDestination);
-        if(shortest!=null){
-            System.out.println("Jalur terpendek : " + String.join("->" , shortest));
-        }
-        else{
-            System.out.println("Gak ada ");
-        }
+    // TODO add your handling code here:
+        try {
+            String startDestination = jTextField4.getText();
+            String finishDestination = jTextField1.getText();
+            List<String> shortestPath = graph.findShortestPath(startDestination, finishDestination);
+
+            System.out.println("Intermediate Vertices:");
+//            for (String vertex : shortestPath) {
+//                jTextField5.setText(vertex);
+//               }
+            if (shortestPath != null) {
+                jTextField5.setText(String.join(" -> ", shortestPath));
+            }
+
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            JOptionPane.showMessageDialog(null, "Vertex Invalid");
+        }                                            
+           
     }//GEN-LAST:event_jMulaiButtonActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jResetButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jResetButton1ActionPerformed
+        // TODO add your handling code here:
+        jTextField4.setText("");
+        jTextField1.setText("");
+    }//GEN-LAST:event_jResetButton1ActionPerformed
 
     /**
      * @param args the command line arguments
